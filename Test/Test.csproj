@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyCSVSerializer\MyCsvSerializer.csproj" />
+  </ItemGroup>
+
 </Project>
