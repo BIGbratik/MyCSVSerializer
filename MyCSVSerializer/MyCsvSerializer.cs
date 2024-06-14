@@ -46,10 +46,11 @@ namespace MyCSVSerializer
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="objList"></param>
-        public void Serialize(Stream stream, IList<T> objList)
+        public string Serialize(Stream stream, IList<T> objList)
         {
             var sb = new StringBuilder();
             var csvRow = new List<string>();
+
 
             sb.AppendLine(GetHeader());
 
@@ -68,10 +69,14 @@ namespace MyCSVSerializer
                 sb.AppendLine(string.Join(_separator.ToString(), csvRow.ToArray()));
             }
 
+            var serializedStr = sb.ToString().Trim();
+
             using (var sw = new StreamWriter(stream))
             {
-                sw.Write(sb.ToString().Trim());
+                sw.Write(serializedStr);
             }
+
+            return serializedStr;
         }
 
         /// <summary>
@@ -79,10 +84,10 @@ namespace MyCSVSerializer
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="obj"></param>
-        public void Serialize(Stream stream, T obj)
+        public string Serialize(Stream stream, T obj)
         {
             var objList = new List<T> { obj };
-            Serialize(stream, objList);
+            return Serialize(stream, objList);
         }
 
         /// <summary>
